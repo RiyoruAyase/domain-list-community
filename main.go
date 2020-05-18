@@ -2,21 +2,20 @@ package main
 
 import (
 	"bufio"
-	"compress/gzip"
 	"errors"
+	"flag"
 	"fmt"
 	"io/ioutil"
-	"net/http"
 	"os"
 	"path/filepath"
-	"regexp"
-	"sort"
 	"strconv"
 	"strings"
 
 	"github.com/golang/protobuf/proto"
 	"v2ray.com/core/app/router"
 )
+
+var dataPath = flag.String("datapath", "", "Path to the custom data folder")
 
 type Entry struct {
 	Type  string
@@ -156,65 +155,6 @@ func DetectPath(path string) (string, error) {
 	return "", err
 }
 
-func GenerateSpeedtest(path string) error {
-	req, err := http.NewRequest("GET", "https://c.speedtest.net/speedtest-servers-static.php", nil)
-	if err != nil {
-		return err
-	}
-
-	req.Header.Set("Accept-Encoding", "gzip")
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	data, err := gzip.NewReader(resp.Body)
-	if err != nil {
-		return err
-	}
-	defer data.Close()
-
-	body, err := ioutil.ReadAll(data)
-	if err != nil {
-		return err
-	}
-
-	reg := regexp.MustCompile(`host="(.+):[0-9]+"`)
-	matchList := reg.FindAllStringSubmatch(string(body), -1)
-
-	exist := make(map[string]bool)
-	var domainList []string
-	for _, match := range matchList {
-		domain := match[1]
-		if exist[domain] {
-			continue
-		}
-
-		ifIP, err := regexp.Match(`^([0-9]{1,3}\.){3}[0-9]{1,3}$`, []byte(domain))
-		if err != nil {
-			return err
-		}
-
-		if ifIP {
-			continue
-		}
-
-		domainList = append(domainList, "full:"+strings.ToLower(domain))
-		exist[domain] = true
-	}
-	sort.Strings(domainList)
-
-	fPath := filepath.Join(path, "ookla-speedtest")
-	b := append([]byte("include:ookla-speedtest-ads\n"), []byte(strings.Join(domainList, "\n"))...)
-	err = ioutil.WriteFile(fPath, b, 0644)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func Load(path string) (*List, error) {
 	file, err := os.Open(path)
 	if err != nil {
@@ -279,13 +219,16 @@ func ParseList(list *List, ref map[string]*List) (*ParsedList, error) {
 }
 
 func main() {
-	dir, err := DetectPath(os.Getenv("GOPATH"))
-	if err != nil {
-		fmt.Println("Failed: ", err)
-		return
-	}
+	flag.Parse()
 
-	if err = GenerateSpeedtest(dir); err != nil {
+	var dir string
+	var err error
+	if *dataPath != "" {
+		dir = *dataPath
+	} else {
+		dir, err = DetectPath(os.Getenv("GOPATH"))
+	}
+	if err != nil {
 		fmt.Println("Failed: ", err)
 		return
 	}
@@ -331,5 +274,7 @@ func main() {
 	}
 	if err := ioutil.WriteFile("dlc.dat", protoBytes, 0777); err != nil {
 		fmt.Println("Failed: ", err)
+	} else {
+		fmt.Println("dlc.dat has been generated successfully.")
 	}
 }

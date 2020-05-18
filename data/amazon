@@ -4,6 +4,8 @@ amazon.co.uk
 amazon.co.jp
 amazon.de
 amazon.jp
+amazon.jobs
+amazontrust.com
 amzn.com
 media-amazon.com
 ssl-images-amazon.com
@@ -11,7 +13,9 @@ ssl-images-amazon.com
 # AWS
 amazonaws.com
 awsstatic.com
+awstrust.com
 cloudfront.net
+elasticbeanstalk.com
 
 # Prime Video
 amazonvideo.com

@@ -12,11 +12,20 @@ include:category-porn
 # News & Press & Media
 include:category-media
 
+# Science & Technology & Knowledge & Scholar & Press
+include:category-scholar-!cn
+include:chinapower
+include:edx
+include:knovel
+include:ted
+
+# Software development related
+include:category-dev
+
 # Tech companies & Orginations
 include:adobe
 include:amazon
 include:apple
-include:cloudflare
 include:facebook
 include:godaddy
 include:google
@@ -27,10 +36,19 @@ include:microsoft
 include:mozilla
 include:nvidia
 include:oracle
+include:salesforce
+include:samsung
 include:twitter
 include:uber
 include:yahoo
 include:yandex
+
+# CDN companies & Services
+include:cloudflare
+include:fastly
+include:pagecdn
+include:quantil
+include:stackpath
 
 # Certificate authorities
 # Reference: https://en.wikipedia.org/wiki/Certificate_authority
@@ -43,48 +61,44 @@ include:identrust
 include:letsencrypt
 include:secom
 include:sectigo
+include:swisssign
 include:telekom
 include:trustwave
 include:verisign
-
-# Software development related
-include:bootstrap
-include:fontawesome
-include:gitbook
-include:github
-include:gitlab
-include:jetbrains
-include:jquery
-include:python
-include:stackexchange
-include:ubuntu
-include:unity
-include:unpkg
-include:xda
-include:xposed
 
 # Services & Softwares
 include:addthis
 include:addtoany
 include:apkpure
 include:bitwarden
+include:digitalocean
 include:disqus
 include:dropbox
 include:duckduckgo
 include:entermediadb
 include:faststone
+include:feedly
 include:gofundme
 include:gravatar
+include:heroku
 include:imgur
 include:infrapedia
 include:jwplayer
+include:linguee
 include:netlify
+include:osdn
+include:patreon
 include:pinterest
 include:protonmail
 include:sharethis
+include:shopify
+include:sourceforge
 include:startpage
 include:steemit
+include:stripe
 include:tumblr
+include:webflow
+include:wix
 include:wordpress
 include:zeit
 
@@ -96,23 +110,38 @@ include:telegram
 
 # E-commerce
 include:bestbuy
+include:dmm
 include:ebay
+include:nike
 
 # Entertainment & Videos & Games & Music
 include:archiveofourown
-include:epicgames
+include:bandcamp
+include:deviantart
 include:disney
+include:epicgames
+include:hbo
+include:hulu
+include:kingkonglive
+include:moov
 include:netflix
+include:nintendo
 include:pixiv
-include:spotify
+include:playstation
 include:soundcloud
+include:spotify
 include:steam
 include:steamunlocked
+include:twitch
 include:ubi
 include:vimeo
+include:viu
+include:weverse
+include:yande
 include:yyets
 
 # Forums
+include:dcard
 include:lihkg
 include:pincong
 include:quora
@@ -129,23 +158,13 @@ include:who
 include:wikimedia
 include:wto
 
-# Science & Technology & Knowledge
-include:acm
-include:chinapower
-include:computingreviews
-include:elsevier
-include:ieee
-include:knovel
-include:nature
-include:springer
-include:ted
-
 # Advertisment & Analytics
-include:clarivate
 include:pubmatic
 include:taboola
 
 # Others
+include:fonts
+include:hkedcity
 include:huanghuagang
 include:rarbg
 include:tsquare
